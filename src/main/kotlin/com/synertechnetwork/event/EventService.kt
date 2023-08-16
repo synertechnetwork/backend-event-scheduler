@@ -16,26 +16,26 @@ class EventService(private val publisher: ApplicationEventPublisher) {
         private val log = LoggerFactory.getLogger(EventService::class.java)
     }
 
-    @EventListener
+   /* @EventListener
     fun onReady(event: ApplicationReadyEvent){
         log.info("Application is ready to start receiving request")
         publisher.publishEvent(UserSubscribedEvent("marcusdashe.developer@gmail.com"))
         log.info("Finished publishing event")
-    }
+    }*/
 
-    @EventListener
+   /* @EventListener
     fun onUserSubscribed(event: UserSubscribedEvent): UserOptInEvent{
         log.info("New subscriber: ${event.email}")
         return UserOptInEvent(event.email, confirmed = true)
-    }
+    }*/
 
-    @Async
-    @EventListener(condition = "#event.confirmed eq true")
-    fun onUserOptIn(event: UserOptInEvent){
-        log.info("Subscriber Opt-in: ${event.email} - ${event.confirmed}")
-        TimeUnit.SECONDS.sleep(5)
-        log.info("Added ${event.email} to the newsletter!")
-    }
+//    @Async
+//    @EventListener(condition = "#event.confirmed eq true")
+//    fun onUserOptIn(event: UserOptInEvent){
+//        log.info("Subscriber Opt-in: ${event.email} - ${event.confirmed}")
+//        TimeUnit.SECONDS.sleep(5)
+//        log.info("Added ${event.email} to the newsletter!")
+//    }
 }
 
 data class UserSubscribedEvent(val email: String)
